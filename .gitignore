@@ -1,0 +1,19 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Git
+.git
+
+# macOS
+.DS_Store
+
+# Python
+Pipfile
+Pipfile.lock
+
+# Ansible
+roles/

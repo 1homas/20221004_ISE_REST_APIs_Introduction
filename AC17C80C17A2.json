@@ -1,0 +1,22 @@
+{
+  "ERSEndPoint" : {
+    "name" : "ac:17:c8:0c:17:a2",
+    "description" : "camera",
+    "mac" : "ac:17:c8:0c:17:a2",
+    "groupId" : "1e2700a0-8c00-11e6-996c-525400b48521",
+    "staticGroupAssignment" : true,
+    "customAttributes" : {
+      "customAttributes" : {
+        "authorization" : "surveillance",
+        "owner" : "cameron",
+        "department" : "Security",
+        "device" : "Camera",
+        "serial_number" : "",
+        "expires" : "20221031T170000",
+        "manufacturer" : "Meraki",
+        "model" : "MV12W",
+        "created" : "20221004T080000"
+      }
+    }
+  }
+}
