@@ -1,6 +1,6 @@
-# ReadMe
+# ISE REST APIs Introduction
 
-
+This is the demo reference for a **[Cisco Identity Services Engine (ISE) webinar](https://cs.co/ise-webinars)** delivered on October 4, 2022. You may find the recording in the **[CiscoISE YouTube Channel](https://cs.co/ise-youtube)**.
 
 ## ISE REST Operations Quick Reference
 
@@ -115,15 +115,8 @@ Download ERS OpenAPI file to local computer for use with Postman later!
     Admin Groups: **`ERS Admin`**
     **Submit**
 
-### Network Devices
 
-1. Go to 𑁔 > Administration > Network Resources > Network Devices
-2. **+Add Network Device**
-    Name: `lab-mr46-1`
-    IP Address: `10.80.60.150/32`
-    RADIUS Authentication Settings:
-      Shared Secret : `ISEisC00L`
-    **Save**
+
 
 ## curl Basics
 
@@ -457,10 +450,13 @@ curl --include --insecure --silent \
     "groupId" : "1e2700a0-8c00-11e6-996c-525400b48521"
   }
 }'
+```
 
-## Response Header :
-## HTTP/1.1 201 
-## Location: https://ise.securitydemo.net:9060/ers/config/endpoint/0bd811b0-892f-11eb-b0e1-b2ca5a4c3815
+Response Header :
+
+```
+HTTP/1.1 201 
+Location: https://ise.securitydemo.net:9060/ers/config/endpoint/0bd811b0-892f-11eb-b0e1-b2ca5a4c3815
 ```
 
 
@@ -555,8 +551,7 @@ curl --include --insecure --silent \
 Response:
 
 ```json
-## Response Header
-## HTTP/1.1 200 
+HTTP/1.1 200 
 
 {
   "UpdatedFieldsList" : {
