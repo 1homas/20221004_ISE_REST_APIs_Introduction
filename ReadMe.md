@@ -1,41 +1,8 @@
 # ReadMe
 
-## Setup
-
-### Firefox Tabs
-- https://ise.securitydemo.net : zoom to 120%
-- https://cs.co/ise-api
-
-### Terminal
-- one terminal
-- CMD+＋ * 10
-- Double-click on title bar to zoom window to fit screen
-- Create your Python environment and install any package requirements:  
-
-    ```sh
-    pip install --upgrade pip
-    pipenv install --python 3.9
-    pipenv install requests
-    pipenv shell
-    ```
-
-### ISE
-
-1. Change admin password to `ISEisC00L`
-1. Add a network device
-1. Create Endpoint Custom Attributes:
-    - authorization
-    - owner
-    - department
-    - device
-    - serialNumber
-    - expires
-    - manufacturer
-    - model
-    - created
 
 
-### ISE REST Operations Quick Reference
+## ISE REST Operations Quick Reference
 
 The basic curl commands for REST operations with ISE
 
@@ -170,14 +137,14 @@ curl --help all
 ```
 
 These are the most popular options that I use:
-`--head` : retrieve headers only
-`--include` : include the response headers in the output
-`--insecure` : disable certificate validation
-`--location` : follow redirects
-`--silent` : disable progress meter/bar
-`--output <file>` : Write output to `<file>` instead of stdout
-`--styled-output` : Enables the automatic use of bold font styles when writing HTTP headers
- `--verbose` : Makes curl verbose during the operation
+- `--head` : retrieve headers only
+- `--include` : include the response headers in the output
+- `--insecure` : disable certificate validation
+- `--location` : follow redirects
+- `--silent` : disable progress meter/bar
+- `--output <file>` : Write output to `<file>` instead of stdout
+- `--styled-output` : Enables the automatic use of bold font styles when writing HTTP headers
+- `--verbose` : Makes curl verbose during the operation
 
 Basic HTTP GET request:
 
@@ -188,9 +155,9 @@ curl http://ise.securitydemo.net
 This returns  `301 Moved Permanently` 8-(
 
 Use the  `--include` the response headers to make more sense of this:
+Include the HTTP response headers in the output
 
 ```sh
-## Include the HTTP response headers in the output
 curl --include  http://ise.securitydemo.net 
 ```
 
@@ -262,8 +229,11 @@ curl --insecure --silent \
 ```
 
 XML in a long, concatenated string is not easy to read. You may use the Unix pipe (`|`) to redirect it to the xmllint program for pretty printing. A linter is a static code analysis tool for syntax checking.
+
 > ⚠ You must remove `--include` or the linting will fail!
+
 > 💡 Use `--silent` to remove the progress table 
+
 > 💡 The final `-` at the end of the command tells xmllint to use `stdin` for the input
 
 ```sh
@@ -395,7 +365,9 @@ curl --insecure --location --silent \
   --header 'Accept: application/json' \
   https://$ISE_HOSTNAME/ers/config/networkdevice
 ```
+
 but this only contains 4 attributes:
+
 - `id`
 - `name`
 - `description`
@@ -419,8 +391,8 @@ GET profilerprofile (>600)
 curl --insecure --silent \
   --user $ISE_REST_USERNAME:$ISE_REST_PASSWORD \
   --header 'Accept: application/json' \
-https://ise.securitydemo.net/ers/config/profilerprofile \
-| jq
+  https://ise.securitydemo.net/ers/config/profilerprofile \
+  | jq
 ```
 
 GET the end of the profilerprofile list
@@ -429,8 +401,8 @@ curl --include --insecure --silent \
   --user $ISE_REST_USERNAME:$ISE_REST_PASSWORD \
   --header 'Accept: application/json' \
   --header 'Content-Type: application/json' \
-"https://ise.securitydemo.net/ers/config/profilerprofile?size=100\&page=7" \
-| jq
+  "https://ise.securitydemo.net/ers/config/profilerprofile?size=100\&page=7" \
+  | jq
 ```
 
 
@@ -521,7 +493,7 @@ curl --include --insecure --silent \
 }'
 ```
 
-Do it again and get a 500 Error!
+Do it again to get a 500 Error because the resource already exists!
 
 
 ### Create a Guest user
@@ -624,7 +596,7 @@ curl --insecure --silent \
 curl --include --insecure --location \
   --header 'Accept: application/json' \
   --user $ISE_REST_USERNAME:$ISE_REST_PASSWORD \
-  --request GET https://$ISE_HOSTNAME/ers/config/hotspotportal/$ID
+  --request GET https://$ISE_HOSTNAME/ers/config/hotspotportal/{id}
 
 ```
 
@@ -635,7 +607,7 @@ curl --include --insecure --location \
   --header 'Content-Type:application/json' \
   --header 'Accept: application/json' \
   --user $ISE_REST_USERNAME:$ISE_REST_PASSWORD \
-  --request PATCH https://$ISE_HOSTNAME/ers/config/hotspotportal/{id} \
+  --request PATCH https://$ISE_HOSTNAME/ers/config/hotspotportal/{id}} \
   --data '
 {
   "HotspotPortal": {
@@ -657,7 +629,7 @@ curl --include --insecure --location \
 --header 'Content-Type:application/json' \
 --header 'Accept: application/json' \
 --user $ISE_REST_USERNAME:$ISE_REST_PASSWORD \
---request PATCH https://$ISE_HOSTNAME/ers/config/hotspotportal/75a5bf99-ce47-422f-8f97-4f9ab4dc67f3 \
+--request PATCH https://$ISE_HOSTNAME/ers/config/hotspotportal/{id} \
 --data '
 {
   "HotspotPortal": {
@@ -682,7 +654,7 @@ curl  --include  --insecure  --location \
 --header 'Content-Type:application/json' \
 --header 'Accept: application/json' \
 --user $ISE_REST_USERNAME:$ISE_REST_PASSWORD \
---request DELETE https://$ISE_HOSTNAME/ers/config/networkdevice/2719b760-2ad9-11ed-8d01-ee1ce3cbfce6
+--request DELETE https://$ISE_HOSTNAME/ers/config/networkdevice/{id}
 
 ```
 
@@ -694,7 +666,7 @@ curl --include --insecure --silent \
   --user $ISE_REST_USERNAME:$ISE_REST_PASSWORD \
   --header 'Accept: application/json' \
   --header 'Content-Type: application/json' \
-  --request DELETE  https://ise.securitydemo.net:9060/ers/config/endpoint/1b3884b0-8906-11eb-b0e1-b2ca5a4c3815
+  --request DELETE  https://ise.securitydemo.net:9060/ers/config/endpoint/{id}
 ```
 
 
@@ -702,7 +674,7 @@ curl --include --insecure --silent \
 
 ### HTTPS Probe for Guest Portal(s)
 ISE 2.7+ portal responds with `HTTP/1.1 200` instead of `HTTP/1.1 200 OK`!
-curl --include https://ise.securitydemo.net:8443/portal/PortalSetup.action?portal=2c78bb61-1644-416a-a44d-c10b48b9ee47
+curl --include https://ise.securitydemo.net:8443/portal/PortalSetup.action?portal={id}
 
 
 
